@@ -20,19 +20,41 @@ class MainHandler(TemplateHandler):
     self.set_header(
       'Cache-Control',
       'no-store, no-cache, must-revalidate, max-age=0')
-    self.render_template("forms.html", {'name': 'World'})
+    self.render_template("hello.html", {'name': 'World'})
 
 class FormsHandler(TemplateHandler):
   def get(self):
     self.set_header(
       'Cache-Control',
       'no-store, no-cache, must-revalidate, max-age=0')
-    self.render_template("hello.html", {})
+    self.render_template("forms.html", {})
+
+  def post(self):
+    email = self.get_body_argument("email")
+    error = ""
+    if email:
+        print("E-mail:", email)
+        self.redirect("/form-success")
+    else:
+        error = "Submit E-mail"
+
+    self.set_header(
+      'Cache-Control',
+      'no-store, no-cache, must-revalidate, max-age=0')
+    self.render_template("forms.html", { "error" : error })
+
+class SuccessHandler(TemplateHandler):
+  def get(self):
+    self.set_header(
+      'Cache-Control',
+      'no-store, no-cache, must-revalidate, max-age=0')
+    self.render_template("form-success.html", {})
 
 def make_app():
   return tornado.web.Application([
     (r"/", MainHandler),
     (r"/forms", FormsHandler),
+    (r"/form-success", SuccessHandler),
     (
       r"/static/(.*)",
       tornado.web.StaticFileHandler,

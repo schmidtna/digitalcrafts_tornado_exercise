@@ -1,5 +1,27 @@
 {% extends "base.html" %}
 {% block content %}
     <h2>Forms Test</h2>
+    {% if error %}
+    <h3>{{ error }}</h3>
+    {% endif %}
+    <form action="/forms" method="POST">
+        <label for="">User Name:</label>
+        <input type="text" name="user_name">
+        <br><br>
+        <label for="">Password:</label>
+        <input type="password" name="password">
+        <br><br>
+        <label for="">E-mail:</label>
+        <input type="email" name="email" required>
+        <br><br>
+        <button type="submit">Submit Form</button>
+        <br><br>
+    </form>
+    <hr>
+    <form action="/forms" method="GET">
+        Search: <input type="text" name="query">
+        <button type="submit">Submit Search</button>
+    </form>
+    <br><br>
     
 {% endblock %}
