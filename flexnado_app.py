@@ -20,11 +20,19 @@ class MainHandler(TemplateHandler):
     self.set_header(
       'Cache-Control',
       'no-store, no-cache, must-revalidate, max-age=0')
-    self.render_template("hello.html", {'name': 'World'})
+    self.render_template("forms.html", {'name': 'World'})
+
+class FormsHandler(TemplateHandler):
+  def get(self):
+    self.set_header(
+      'Cache-Control',
+      'no-store, no-cache, must-revalidate, max-age=0')
+    self.render_template("hello.html", {})
 
 def make_app():
   return tornado.web.Application([
     (r"/", MainHandler),
+    (r"/forms", FormsHandler),
     (
       r"/static/(.*)",
       tornado.web.StaticFileHandler,
