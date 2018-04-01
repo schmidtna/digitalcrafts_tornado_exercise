@@ -1,6 +1,7 @@
 import tornado.ioloop
 import tornado.web
 import tornado.log
+import os
 from jinja2 import \
   Environment, PackageLoader, select_autoescape
 
@@ -35,5 +36,6 @@ if __name__ == "__main__":
   tornado.log.enable_pretty_logging()
 
   app = make_app()
-  app.listen(8888)
+  PORT = int(os.environ.get("PORT", "8888"))
+  app.listen(PORT)
   tornado.ioloop.IOLoop.current().start()
