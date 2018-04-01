@@ -24,6 +24,11 @@ class MainHandler(TemplateHandler):
 def make_app():
   return tornado.web.Application([
     (r"/", MainHandler),
+    (
+      r"/static/(.*)",
+      tornado.web.StaticFileHandler,
+      {'path': 'static'}
+    ),
   ], autoreload=True)
 
 if __name__ == "__main__":

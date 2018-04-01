@@ -1,0 +1,45 @@
+nav {
+    margin-bottom: 2em;
+    border-bottom: 1px solid lightgray;
+}
+#navbarNav {
+    justify-content: flex-end;
+    
+}
+
+.nav-item:not(:last-child) {
+    border-right: 1px solid lightgray;
+}
+
+h5 {
+    padding-left: 1.5em;
+}
+
+.centered {
+    text-align: center;
+}
+
+.container, .container-fluid {
+    border-bottom: 1px solid lightgray;
+    margin-bottom: 2em;
+    max-width: 95%;
+    height: auto;
+}
+
+
+.awesomeness {
+    margin: auto;
+   
+}
+
+.aw-list {
+   list-style-position: inside;
+}
+
+footer {
+    background-color: lightgray;
+    height: 100px;
+    margin: 0;
+    justify-content: flex-end;
+}
+
