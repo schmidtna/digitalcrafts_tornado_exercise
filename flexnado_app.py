@@ -2,8 +2,16 @@ import tornado.ioloop
 import tornado.web
 import tornado.log
 import os
+import boto3
 from jinja2 import \
   Environment, PackageLoader, select_autoescape
+
+client = boto3.client(
+  'ses',
+  region_name="us-east-1",
+  aws_access_key_id="AKIAI3GBE3AEW6WSYMCA",
+  aws_secret_access_key="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"
+)
 
 ENV = Environment(
   loader=PackageLoader('flexapp', 'templates'),
@@ -34,6 +42,21 @@ class FormsHandler(TemplateHandler):
     error = ""
     if email:
         print("E-mail:", email)
+        response = client.send_email(
+            Destination={
+            'ToAddresses': ['ashblasta@gmail.com'],
+            },
+            Message={
+            'Body': {
+                'Text': {
+                'Charset': 'UTF-8',
+                'Data': "{} wants to talk to you.".format(email),
+                },
+            },
+            'Subject': {'Charset': 'UTF-8', 'Data': 'Test email'},
+            },
+            Source='mailer@bladebinder.com',
+            )
         self.redirect("/form-success")
     else:
         error = "Submit E-mail"
