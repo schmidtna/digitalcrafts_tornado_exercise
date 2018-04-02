@@ -1,3 +1,4 @@
+#Hosted at app.bladebinder.com/forms for the email tester
 import tornado.ioloop
 import tornado.web
 import tornado.log
@@ -39,6 +40,7 @@ class FormsHandler(TemplateHandler):
 
   def post(self):
     email = self.get_body_argument("email")
+    comments = self.get_body_argument("comments", None)
     error = ""
     if email:
         print("E-mail:", email)
@@ -50,7 +52,7 @@ class FormsHandler(TemplateHandler):
             'Body': {
                 'Text': {
                 'Charset': 'UTF-8',
-                'Data': "{} wants to talk to you.".format(email),
+                'Data': "{} wants to talk to you.\n\n{}".format(email, comments),
                 },
             },
             'Subject': {'Charset': 'UTF-8', 'Data': 'Test email'},
