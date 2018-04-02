@@ -10,8 +10,8 @@ from jinja2 import \
 client = boto3.client(
   'ses',
   region_name="us-east-1",
-  aws_access_key_id="AKIAI3GBE3AEW6WSYMCA",
-  aws_secret_access_key="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"
+  aws_access_key_id=os.environ.get('AWS_ACCESS_KEY'),
+  aws_secret_access_key=os.environ.get('AWS_SECRET_KEY')
 )
 
 ENV = Environment(
