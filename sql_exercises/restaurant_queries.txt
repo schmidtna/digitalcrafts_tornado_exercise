@@ -1,0 +1,36 @@
+CREATE TABLE restaurant (
+	id SERIAL NOT NULL PRIMARY KEY,
+    name VARCHAR,
+	distance REAL,
+	stars REAL,
+	category VARCHAR,
+	favorite_dish VARCHAR,
+	takeout_option BOOLEAN,
+	last_visit DATE
+	);
+
+INSERT INTO restaurant VALUES ( DEFAULT, 'Russos', 3.5, 3.5, 'Pizza/Italian', 'Calzone', TRUE, '2018-04-04')
+INSERT INTO restaurant VALUES (DEFAULT, 'Chachis', 2, 5, 'Chicken', 'Fried Chicken', FALSE, '2017-10-11')
+INSERT INTO restaurant VALUES (DEFAULT, 'Fuddruckers', 3.5, 5, 'Burgers', 'Bourbon Burger', TRUE, '2018-02-13')
+INSERT INTO restaurant VALUES (DEFAULT, 'Olive Garden', 4, 1.5, 'Italian', 'Tour of Italy', TRUE, '2018-02-20')
+INSERT INTO restaurant VALUES (DEFAULT, 'Robins', 1.5, 6, 'Ramen', 'Rice Bowl', FALSE, '2018-03-09')
+INSERT INTO restaurant VALUES (DEFAULT, 'Canes', 3.5, 4, 'Fried Chicken', 'Chicken Strips', TRUE, '2017-11-18')
+
+SELECT * FROM restaurant WHERE stars = 5;
+SELECT favorite_dish FROM restaurant WHERE stars = 5;
+SELECT id FROM restaurant WHERE name ILIKE '%canes%';
+SELECT * FROM restaurant WHERE category = 'BBQ';
+SELECT * FROM restaurant WHERE takeout_option = TRUE;
+SELECT * FROM restaurant WHERE takeout_option = TRUE AND category = 'BBQ';
+SELECT * FROM restaurant WHERE distance <= 2;
+SELECT * FROM restaurant WHERE last_visit <= '2018-04-01';
+SELECT * FROM restaurant WHERE last_visit <= '2018-04-01' AND stars = 5;
+
+SELECT * FROM restaurant ORDER BY distance;
+SELECT * FROM restaurant ORDER BY distance LIMIT 2;
+SELECT * FROM restaurant ORDER BY stars DESC LIMIT 2;
+SELECT * FROM restaurant WHERE distance <= 2 ORDER BY stars DESC LIMIT 2;
+SELECT COUNT (*) FROM restaurant;
+SELECT category, COUNT(*) FROM restaurant GROUP BY category;
+SELECT category, AVG(stars) FROM restaurant GROUP BY category;
+SELECT category, MAX(stars) FROM restaurant GROUP BY category;
