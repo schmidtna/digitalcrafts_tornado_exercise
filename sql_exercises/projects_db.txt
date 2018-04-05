@@ -1,0 +1,9 @@
+SELECT project.name FROM project 
+INNER JOIN project_uses_tech ON project_uses_tech.project_id = project.id
+INNER JOIN tech ON project_uses_tech.tech_id = tech.id
+WHERE tech.name ILIKE '%javascript%';
+
+SELECT project.name, tech.name FROM project 
+INNER JOIN project_uses_tech ON project_uses_tech.project_id = project.id
+INNER JOIN tech ON project_uses_tech.tech_id = tech.id
+WHERE project.name ILIKE '%personal website%'
