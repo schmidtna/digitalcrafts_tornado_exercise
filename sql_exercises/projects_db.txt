@@ -7,3 +7,28 @@ SELECT project.name, tech.name FROM project
 INNER JOIN project_uses_tech ON project_uses_tech.project_id = project.id
 INNER JOIN tech ON project_uses_tech.tech_id = tech.id
 WHERE project.name ILIKE '%personal website%'
+
+SELECT * FROM tech
+LEFT JOIN project_uses_tech ON tech.id = project_uses_tech.tech_id
+WHERE tech_id IS NULL;
+
+SELECT project_id, COUNT(tech_id) FROM tech
+LEFT JOIN project_uses_tech ON tech.id = project_uses_tech.tech_id
+GROUP BY project_uses_tech.project_id;
+
+select * from project
+LEFT JOIN project_uses_tech ON project_id = project.id
+WHERE tech_id IS NULL;
+
+SELECT tech_id, COUNT(project_id) FROM project
+LEFT JOIN project_uses_tech ON project.id = project_uses_tech.project_id
+GROUP BY project_uses_tech.tech_id;
+
+SELECT * FROM project 
+INNER JOIN project_uses_tech ON project_uses_tech.project_id = project.id
+INNER JOIN tech ON project_uses_tech.tech_id = tech.id
+
+SELECT DISTINCT(tech.name), project_id FROM tech
+LEFT JOIN project_uses_tech ON project_uses_tech.project_id = tech.id
+WHERE project_id >= 1;
+
